@@ -1,0 +1,13 @@
+[web]
+#ansible_host=192.168.116.143
+192.168.116.143
+[mail]
+#ansible_host=192.168.116.138
+192.168.116.138
+[db]
+192.168.116.149
+
+[all:children]
+web
+mail
+db

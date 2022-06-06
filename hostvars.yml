@@ -1,0 +1,25 @@
+---
+- name: install a package using host variables
+  hosts: db
+  become: true
+  become_user: root
+  vars_files:
+          - host_vars/192.168.116.148
+  tasks:
+          - name: Install {{ pkg }} from host variables
+            yum:
+                    name: "{{ pkg }}" 
+                    state: latest
+
+- name: Creat an user using host variables
+  hosts: web
+  become: true
+  become_user: root
+  vars_files:
+          - vars/vars.yml 
+  tasks:
+          - name: Create an {{ user2 }} from variable 
+            user:
+                    name: " {{ user2 }}" 
+                    home: "{{ home2 }}"
+

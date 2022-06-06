@@ -1,0 +1,39 @@
+---
+- name: Install apache service in all hosts
+  hosts: all
+  become: true
+  become_user: root
+  tasks:
+          - name: install httpd service
+            yum:
+
+                    name: httpd
+                    state: latest
+          - name: STart httpd service
+            service:
+                    name: httpd
+                    state: started
+                    enabled: true
+
+          - name: Copy the file to destination
+            copy:
+                    src: /home/ansible/mongodb.repo
+                    dest: /etc/yum.repos.d/mongodb.repo
+                    owner: root
+                    group: root
+                    mode: '644'
+          - name: Update the system
+            yum:
+                    name: '*'
+                    state: latest
+
+          - name: Install Mangodb service
+            yum:
+                    name: mongodb-org
+                    state: installed
+
+          - name: Start the mangodb service
+            service:
+                     name: mongod
+                     state: restarted
+                     enabled: true

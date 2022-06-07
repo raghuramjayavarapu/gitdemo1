@@ -1,0 +1,23 @@
+---
+- name: Create user and install package using vars and group vars file
+  hosts: mail
+  become: true
+  become_user: root
+  vars_files:
+          - vars/vars.yml
+  tasks:
+          - name: Create user from vars_files
+            user:
+                    name: "{{ user4 }}"
+                    home: "{{ home4 }}"
+          - name: Copy the file at the trget machine
+            copy:
+                    src: /home/ansible/mongodb.repo
+                    dest: /tmp/mongodb.repo
+          - name: Create a file in target machine
+            become: yes
+            file:
+                    path: /tmp/test1.txt
+                    state: touch
+                    mode: 0644
+

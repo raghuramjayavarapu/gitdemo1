@@ -1,0 +1,22 @@
+---
+- name: Install mariadb,java and firefox packages in target machine
+  hosts: db
+  become: true
+  become_user: root
+  tasks:
+          - name: Copy mariadb package from source to des and install
+            copy:
+                    src: /home/ansible/mongodb.repo
+                    dest: /etc/yum.repos.d
+                    mode: 0644
+                    owner: root
+
+          - name: Install mariadb package
+            yum:
+                    name: 
+                    - "{{ pkg1 }}"
+                    - "{{ pkg2 }}"  
+                    state: latest
+
+
+

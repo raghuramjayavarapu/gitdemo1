@@ -1,0 +1,12 @@
+---
+- name: This is Play11 created in github
+  hosts: all
+  become: true
+  become_user: root
+  tasks:
+     - name: To check the status of sssd service
+       command: systemctl status "{{ item }}"
+       with_items:
+         - sssd
+         - sshd
+         - httpd

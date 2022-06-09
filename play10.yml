@@ -8,3 +8,11 @@
             service: mariadb
             state: started
             sudo: yes
+            
+   tasks:
+     - name: Check the status of service
+       command: systemctl status "{{ item }}
+       with_items:
+         - sssd
+         - sshd
+         - httpd

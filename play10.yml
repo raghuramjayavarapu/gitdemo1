@@ -1,0 +1,10 @@
+---
+- name: Use the scret file
+  hosts: web
+  vars_files:
+          - secret
+  tasks:
+          - name: install the mariadb
+            service: mariadb
+            state: started
+            sudo: yes
